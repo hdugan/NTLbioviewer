@@ -197,7 +197,7 @@ shinyServer(function(input, output) {
   output$urlname <- renderUI({
     a <- matchtable %>% dplyr::filter(names == input$input.vars) %>% dplyr::pull(url)
     url <- a("EDI Dataset Page", href = a, target="_blank")
-    tagList("A friendly reminder to please cite data! Data citation for this dataset can be found here: ", url)
+    tagList("The full dataset and citation for this dataset can be found at: ", url)
   })
   
   renderUI({
