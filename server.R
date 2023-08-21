@@ -62,8 +62,8 @@ LTERcrayfish = loadLTERcrayfish() |>
   mutate(CPUE = total_caught/effort) |> 
   mutate(item = 'rusty') |> 
   filter(spname != 'CRAYFISH') |> 
-  filter(!gearid %in% c('ELFISH','MINNOW')) |> 
-  mutate(gearid = case_when(gearid == 'BSEINE' ~ 'Beach Seine',
+  filter(gearid == 'CRAYTR') |> 
+  mutate(gearid = case_when(gearid == 'BSEINE' ~ 'Beach Seine (ended 2019)',
                             gearid == 'CRAYTR' ~ 'Crayfish Trap',
                             gearid == 'ELFISH' ~ 'Electrofishing',
                             gearid == 'FYKNET' ~ 'Fyke Net',
@@ -80,7 +80,7 @@ LTERfishabundance = loadLTERfishabundance() |>
   filter(spname != 'UNIDENTIFIED') |> 
   filter(!gearid %in% c('ESHOCK','MINNOW')) |> 
   mutate(gearid = if_else(grepl('VGN', gearid), 'VGN', gearid)) |> 
-  mutate(gearid = case_when(gearid == 'BSEINE' ~ 'Beach Seine',
+  mutate(gearid = case_when(gearid == 'BSEINE' ~ 'Beach Seine (ended 2019)',
                             gearid == 'CRAYTR' ~ 'Crayfish Trap',
                             gearid == 'ELFISH' ~ 'Electrofishing',
                             gearid == 'FYKNET' ~ 'Fyke Net',
@@ -237,6 +237,7 @@ shinyServer(function(input, output) {
     
     p = p +
       geom_col(aes(x = year4, y = CPUE), size = 0.5, fill = '#f0ce3a') + #
+      xlim(1981, as.numeric(format(Sys.Date(), "%Y"))) +
       ylab('CPUE')
 
     if ('Log y-axis' %in% input$scales) {

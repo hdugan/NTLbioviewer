@@ -49,6 +49,8 @@ shinyUI(fluidPage(
       #                              'Wingra'))),
       
       uiOutput("dataLakes"),
+      h5("Sampling of Allequash, Big Musky, Crystal, Sparkling, Crystal Bog, and Trout Bog began in 1981."),
+      h5("Sampling of Mendota, Monona, Fish, and Wingra began in 1995."),
       uiOutput("dataSpecies"),
       uiOutput("dataGear"),
       # radioButtons("plottype", "Plot type:",
